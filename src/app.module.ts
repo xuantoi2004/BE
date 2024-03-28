@@ -17,9 +17,10 @@ import { ProductpropsModule } from './productprops/productprops.module';
 import { CommonModule } from './common/common.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { InvoiceChildModule } from './invoice_child/invoice_child.module';
+import { GeminiModule } from './gemini/gemini.module';
 
 @Module({
-  imports: [ConfigModule, CustomersModule, OrdersModule, PaymentModule, CategoryModule, ShippersModule, OrderdetailsModule, ProductsModule, SuppliersModule, DatabaseModule, ProductdetailsModule, GoodsCategoryModule, ProductpropsModule, CommonModule, InvoiceModule, InvoiceChildModule],
+  imports: [ConfigModule, CustomersModule, OrdersModule, PaymentModule, CategoryModule, ShippersModule, OrderdetailsModule, ProductsModule, SuppliersModule, DatabaseModule, ProductdetailsModule, GoodsCategoryModule, ProductpropsModule, CommonModule, InvoiceModule, InvoiceChildModule, GeminiModule],
   controllers: [AppController],
   providers: [AppService],
 })
