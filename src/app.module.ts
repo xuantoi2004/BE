@@ -19,11 +19,15 @@ import { InvoiceModule } from './invoice/invoice.module';
 import { InvoiceChildModule } from './invoice_child/invoice_child.module';
 import { GeminiModule } from './gemini/gemini.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule, CustomersModule, OrdersModule, PaymentModule, CategoryModule, ShippersModule, OrderdetailsModule, ProductsModule, SuppliersModule, DatabaseModule, ProductdetailsModule, GoodsCategoryModule, ProductpropsModule, CommonModule, InvoiceModule, InvoiceChildModule, GeminiModule,
-    
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname,'..','..','upload')
+    // })
   ],
   controllers: [AppController],
   providers: [AppService],

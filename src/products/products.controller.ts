@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UploadedFile, UseInterceptors, HttpStatus, HttpCode, Res } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('products')
 export class ProductsController {
@@ -52,5 +53,22 @@ export class ProductsController {
       result: product,
       status: 'success'
     }
+  }
+
+  @UseInterceptors(FileInterceptor('image'))
+  @HttpCode(HttpStatus.OK)
+  @Post('upload')
+  uploadImageProduct(
+    @UploadedFile() image: Express.Multer.File
+  ) {
+    return {
+      result: image.filename,
+      status: 'success'
+    }
+  }
+
+  @Get('image/:filename')
+  async serveAvatar(@Param('filename') fileName, @Res() res): Promise<any> {
+    res.sendFile(fileName, { root: 'upload'});
   }
 }
