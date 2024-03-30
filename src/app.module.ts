@@ -18,9 +18,13 @@ import { CommonModule } from './common/common.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { InvoiceChildModule } from './invoice_child/invoice_child.module';
 import { GeminiModule } from './gemini/gemini.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
-  imports: [ConfigModule, CustomersModule, OrdersModule, PaymentModule, CategoryModule, ShippersModule, OrderdetailsModule, ProductsModule, SuppliersModule, DatabaseModule, ProductdetailsModule, GoodsCategoryModule, ProductpropsModule, CommonModule, InvoiceModule, InvoiceChildModule, GeminiModule],
+  imports: [
+    ConfigModule, CustomersModule, OrdersModule, PaymentModule, CategoryModule, ShippersModule, OrderdetailsModule, ProductsModule, SuppliersModule, DatabaseModule, ProductdetailsModule, GoodsCategoryModule, ProductpropsModule, CommonModule, InvoiceModule, InvoiceChildModule, GeminiModule,
+    
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

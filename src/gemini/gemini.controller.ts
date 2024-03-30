@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { GeminiService } from './gemini.service';
 import { CreateGeminiDto } from './dto/create-gemini.dto';
 import { UpdateGeminiDto } from './dto/update-gemini.dto';
 import { PromptBody } from './dto/prompt.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import {Express} from 'express';
 
 @Controller('gemini')
 export class GeminiController {
@@ -38,4 +40,15 @@ export class GeminiController {
   getPromptResponse(@Body() body: PromptBody) {
     return this.geminiService.getPromptResponse(body.prompt);
   }
+
+  @UseInterceptors(FilesInterceptor('images', 10))
+  @HttpCode(HttpStatus.OK)
+  @Post('upload')
+  getPromptWithImageResponse(
+    @UploadedFiles() images: Array<Express.Multer.File>, 
+    @Body() body: PromptBody
+  ) {
+    return this.geminiService.getPromptWithImageResponse(images, body.prompt);
+  }
+
 }
