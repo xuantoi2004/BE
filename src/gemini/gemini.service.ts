@@ -26,7 +26,6 @@ export class GeminiService {
     const result = await this.genAiProVisionModel.generateContent([prompt, ...imageParts]);
     const response = await result.response;
     const text = response.text();
-    console.log(text);
     return text;
   }
 

@@ -46,7 +46,12 @@ export class ProductdetailsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productdetailsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const productdetail = await this.productdetailsService.remove(+id);
+
+    return {
+      result: productdetail,
+      status: 'success'
+    }
   }
 }

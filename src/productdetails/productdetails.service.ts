@@ -77,7 +77,13 @@ export class ProductdetailsService {
 
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} productdetail`;
+  async remove(id: number) {
+    const prodDetail = await this.prodDetailRepository.findOne({
+      where: {
+        id
+      }
+    })
+
+    return await this.prodDetailRepository.softRemove(prodDetail);
   }
 }
