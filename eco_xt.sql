@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100428 (10.4.28-MariaDB)
  Source Host           : localhost:3307
- Source Schema         : eco
+ Source Schema         : eco_xt
 
  Target Server Type    : MySQL
  Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 27/03/2024 00:12:27
+ Date: 04/04/2024 20:42:27
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `category`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_d75549613c2ae44496853c6de26`(`goodCategoryId` ASC) USING BTREE,
   CONSTRAINT `FK_d75549613c2ae44496853c6de26` FOREIGN KEY (`goodCategoryId`) REFERENCES `goods_category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
@@ -69,7 +69,7 @@ CREATE TABLE `customer`  (
   `active` tinyint NOT NULL DEFAULT 1,
   `gender` tinyint NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customer
@@ -89,7 +89,7 @@ CREATE TABLE `goods_category`  (
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `picture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of goods_category
@@ -119,11 +119,12 @@ CREATE TABLE `invoice`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_925aa26ea12c28a6adb614445ee`(`customerId` ASC) USING BTREE,
   CONSTRAINT `FK_925aa26ea12c28a6adb614445ee` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of invoice
 -- ----------------------------
+INSERT INTO `invoice` VALUES ('2024-04-02 00:42:30.730000', '2024-04-02 00:42:30.730000', NULL, 1, 'Đức Thắng', 'null', 'null', 'null', 'null', 1, 1, 6800000, '1', 1, '113');
 
 -- ----------------------------
 -- Table structure for invoice_child
@@ -143,11 +144,12 @@ CREATE TABLE `invoice_child`  (
   INDEX `FK_2de8bf244406b73bffbf01b123f`(`invoiceId` ASC) USING BTREE,
   CONSTRAINT `FK_076c4f08a3e421d44878978d2af` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_2de8bf244406b73bffbf01b123f` FOREIGN KEY (`invoiceId`) REFERENCES `invoice` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of invoice_child
 -- ----------------------------
+INSERT INTO `invoice_child` VALUES ('2024-04-02 00:42:30.747000', '2024-04-02 00:42:30.747000', NULL, 1, 1, 6800000, 1, 1);
 
 -- ----------------------------
 -- Table structure for migrations
@@ -158,7 +160,7 @@ CREATE TABLE `migrations`  (
   `timestamp` bigint NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -191,7 +193,7 @@ CREATE TABLE `order`  (
   UNIQUE INDEX `REL_9ad13532f48db4ac5a3b3dd70e`(`paymentId` ASC) USING BTREE,
   CONSTRAINT `FK_124456e637cca7a415897dce659` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_9ad13532f48db4ac5a3b3dd70e5` FOREIGN KEY (`paymentId`) REFERENCES `payment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order
@@ -222,7 +224,7 @@ CREATE TABLE `orderdetail`  (
   CONSTRAINT `FK_aa8ab952b0b4cead542acbe18e7` FOREIGN KEY (`shipperId`) REFERENCES `shipper` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_c2354396f8361da558b647ed342` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ed57365b5815a7e0b94f8c54217` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orderdetail
@@ -244,7 +246,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_a3772a91be111b4b6a8a496fffa`(`supplierId` ASC) USING BTREE,
   CONSTRAINT `FK_a3772a91be111b4b6a8a496fffa` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
@@ -276,7 +278,7 @@ CREATE TABLE `product`  (
   INDEX `FK_ff0c0301a95e517153df97f6812`(`categoryId` ASC) USING BTREE,
   CONSTRAINT `FK_4346e4adb741e80f3711ee09ba4` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ff0c0301a95e517153df97f6812` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product
@@ -297,7 +299,7 @@ CREATE TABLE `productdetail`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_42f77c2d330e36a128dec7e6570`(`productId` ASC) USING BTREE,
   CONSTRAINT `FK_42f77c2d330e36a128dec7e6570` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of productdetail
@@ -322,7 +324,7 @@ CREATE TABLE `productprop`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_980b1ed324498ac3e048f0448e6`(`productId` ASC) USING BTREE,
   CONSTRAINT `FK_980b1ed324498ac3e048f0448e6` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of productprop
@@ -344,7 +346,7 @@ CREATE TABLE `shipper`  (
   `active` tinyint NOT NULL DEFAULT 1,
   `rate` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of shipper
@@ -377,7 +379,7 @@ CREATE TABLE `supplier`  (
   UNIQUE INDEX `IDX_c40cbff7400f06ae1c8d9f4233`(`email` ASC) USING BTREE,
   UNIQUE INDEX `REL_b28bf31339aa7f2a202bb8146c`(`customerId` ASC) USING BTREE,
   CONSTRAINT `FK_b28bf31339aa7f2a202bb8146cd` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of supplier
