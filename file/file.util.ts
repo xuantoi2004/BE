@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 @Injectable()
 export class FileUtil {
     editFileName(req: any, file: any, callback: any) {
-        const originalFileName = file.originalname;
+        const originalFileName = Date.now() + file.originalname;
         callback(null, originalFileName);
     }
 
